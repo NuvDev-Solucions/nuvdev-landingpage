@@ -140,7 +140,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDiagnosis }) => {
           <button
             onClick={onOpenDiagnosis}
             id="nav-cta-estimate"
-            className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#0CBFFD] via-[#0775FF] to-[#066eff] text-[#FEFEFE] font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(12,191,253,0.35)] hover:shadow-[0_0_28px_rgba(12,191,253,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all"
+            className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#0CBFFD] via-[#0775FF] to-[#066eff] text-[#FEFEFE] font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(12,191,253,0.35)] hover:shadow-[0_0_28px_rgba(12,191,253,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             <span>Solicitar Orçamento</span>
             <ArrowUpRight className="w-3.5 h-3.5 ml-1" />

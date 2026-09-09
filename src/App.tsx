@@ -51,12 +51,12 @@ export default function App() {
   };
 
   return (
-    <div className="bg-[#05070E] min-h-screen text-[#dee2f6] font-sans antialiased selection:bg-[#0CBFFD]/20 selection:text-[#0CBFFD] flex flex-col">
+    <div className="bg-[#05070E] min-h-screen text-[#dee2f6] font-sans antialiased selection:bg-[#0CBFFD]/20 selection:text-[#0CBFFD] flex flex-col w-full max-w-full overflow-x-hidden">
       {/* Fixed Navigation Header */}
       <Header onOpenDiagnosis={handleStartProject} />
 
       {/* Main Content Sections */}
-      <main className="w-full pt-20 flex-1 flex flex-col">
+      <main className="w-full max-w-full pt-20 flex-1 flex flex-col overflow-x-hidden">
         {/* 1. Hero Section with Live Telemetry Dashboard */}
         <Hero
           onStartProject={handleStartProject}

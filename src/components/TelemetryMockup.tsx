@@ -33,18 +33,20 @@ export const TelemetryMockup: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full rounded-2xl bg-[#0F172A]/90 border border-[#14BDFE]/20 shadow-2xl backdrop-blur-xl overflow-hidden p-5 md:p-6 flex flex-col gap-4 group">
+    <div className="relative w-full rounded-2xl bg-[#0F172A]/90 border border-[#14BDFE]/20 shadow-2xl backdrop-blur-xl overflow-hidden p-4 sm:p-5 md:p-6 flex flex-col gap-4 group">
       {/* Top Terminal Header */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-3">
-        <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-[#ffb4ab] inline-block"></span>
-          <span className="w-3 h-3 rounded-full bg-[#03befb] inline-block"></span>
-          <span className="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
-          <span className="font-mono text-xs text-[#c2c6d8] ml-2">nuvdev-cloud-cluster.core</span>
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/5 pb-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="w-3 h-3 rounded-full bg-[#ffb4ab] inline-block shrink-0"></span>
+          <span className="w-3 h-3 rounded-full bg-[#03befb] inline-block shrink-0"></span>
+          <span className="w-3 h-3 rounded-full bg-emerald-400 inline-block shrink-0"></span>
+          <span className="font-mono text-[11px] sm:text-xs text-[#c2c6d8] ml-1 truncate max-w-[120px] sm:max-w-none">
+            nuvdev-cloud-cluster.core
+          </span>
         </div>
 
         {/* Region Switcher Dropdown / Badge */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <div className="relative inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#1a1f2e] border border-[#0CBFFD]/30 text-[#0CBFFD] font-mono text-[11px]">
             <span className="w-2 h-2 rounded-full bg-[#0CBFFD] animate-ping"></span>
             <select
@@ -63,7 +65,7 @@ export const TelemetryMockup: React.FC = () => {
             onClick={handleSimulatePing}
             title="Recalcular Latência de Rede"
             disabled={isPinging}
-            className="p-1 rounded-md bg-[#1a1f2e] text-[#0CBFFD] hover:bg-[#252a39] transition-colors"
+            className="p-1 rounded-md bg-[#1a1f2e] text-[#0CBFFD] hover:bg-[#252a39] transition-colors shrink-0"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isPinging ? 'animate-spin text-emerald-400' : ''}`} />
           </button>
@@ -71,7 +73,7 @@ export const TelemetryMockup: React.FC = () => {
       </div>
 
       {/* Visual Dashboard Preview Image */}
-      <div className="relative w-full h-52 sm:h-56 rounded-xl overflow-hidden border border-[#14BDFE]/20 shadow-md group/img">
+      <div className="relative w-full h-48 sm:h-56 rounded-xl overflow-hidden border border-[#14BDFE]/20 shadow-md group/img">
         <img
           src={ASSETS.heroDashboard}
           alt="Futuristic cloud telemetry dashboard with microservices metrics in cyan"
@@ -82,68 +84,68 @@ export const TelemetryMockup: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent pointer-events-none"></div>
 
         {/* Live Metrics Overlay */}
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between bg-[#0F172A]/80 backdrop-blur-md p-2.5 rounded-lg border border-white/5">
-          <div>
-            <span className="font-mono text-[11px] text-[#94A3B8] block">Throughput Global</span>
-            <p className="font-sans font-bold text-lg text-[#FEFEFE]">{throughput}M req/min</p>
+        <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between bg-[#0F172A]/85 backdrop-blur-md p-2 sm:p-2.5 rounded-lg border border-white/5">
+          <div className="min-w-0">
+            <span className="font-mono text-[10px] sm:text-[11px] text-[#94A3B8] block truncate">Throughput Global</span>
+            <p className="font-sans font-bold text-base sm:text-lg text-[#FEFEFE]">{throughput}M req/min</p>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="px-2 py-1 rounded bg-[#0775FF]/30 border border-[#0775FF]/50 text-[#FEFEFE] font-mono text-xs flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-              Latência: {latency}ms
+          <div className="flex items-center gap-1.5 shrink-0">
+            <span className="px-2 py-0.5 sm:py-1 rounded bg-[#0775FF]/30 border border-[#0775FF]/50 text-[#FEFEFE] font-mono text-[11px] sm:text-xs flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0"></span>
+              {latency}ms
             </span>
           </div>
         </div>
       </div>
 
       {/* Interactive Architecture Nodes */}
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
         {/* Node 1: Microservices */}
         <div
           onClick={() => setActiveNodeDetail(activeNodeDetail === 'microservices' ? null : 'microservices')}
-          className={`p-2.5 rounded-lg bg-[#1a1f2e] border transition-all cursor-pointer flex flex-col gap-1 ${
+          className={`p-2 sm:p-2.5 rounded-lg bg-[#1a1f2e] border transition-all cursor-pointer flex flex-col gap-1 min-w-0 overflow-hidden ${
             activeNodeDetail === 'microservices' ? 'border-[#0CBFFD] bg-[#252a39]' : 'border-transparent hover:border-[#14BDFE]/30'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="material-symbols-outlined text-[18px] text-[#0CBFFD]">deployed_code</span>
-            <span className="font-mono text-[11px] text-[#89d5ff]">v4.8</span>
+            <span className="material-symbols-outlined text-[16px] sm:text-[18px] text-[#0CBFFD]">deployed_code</span>
+            <span className="font-mono text-[10px] sm:text-[11px] text-[#89d5ff]">v4.8</span>
           </div>
-          <span className="text-xs text-[#94A3B8]">Microservices</span>
-          <span className="text-xs font-bold text-[#FEFEFE] flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-            100% Healthy
+          <span className="text-[11px] sm:text-xs text-[#94A3B8] truncate">Microservices</span>
+          <span className="text-[11px] sm:text-xs font-bold text-[#FEFEFE] flex items-center gap-1 truncate">
+            <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
+            100% OK
           </span>
         </div>
 
         {/* Node 2: AI Dispatcher */}
         <div
           onClick={() => setActiveNodeDetail(activeNodeDetail === 'ai' ? null : 'ai')}
-          className={`p-2.5 rounded-lg bg-[#1a1f2e] border transition-all cursor-pointer flex flex-col gap-1 ${
+          className={`p-2 sm:p-2.5 rounded-lg bg-[#1a1f2e] border transition-all cursor-pointer flex flex-col gap-1 min-w-0 overflow-hidden ${
             activeNodeDetail === 'ai' ? 'border-[#14BDFE] bg-[#252a39]' : 'border-transparent hover:border-[#14BDFE]/30'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="material-symbols-outlined text-[18px] text-[#14BDFE]">psychology</span>
-            <span className="font-mono text-[11px] text-[#89d5ff]">LLM</span>
+            <span className="material-symbols-outlined text-[16px] sm:text-[18px] text-[#14BDFE]">psychology</span>
+            <span className="font-mono text-[10px] sm:text-[11px] text-[#89d5ff]">LLM</span>
           </div>
-          <span className="text-xs text-[#94A3B8]">AI Dispatcher</span>
-          <span className="text-xs font-bold text-[#FEFEFE]">4.2k ops/s</span>
+          <span className="text-[11px] sm:text-xs text-[#94A3B8] truncate">AI Dispatcher</span>
+          <span className="text-[11px] sm:text-xs font-bold text-[#FEFEFE] truncate">4.2k ops/s</span>
         </div>
 
         {/* Node 3: Database RDS */}
         <div
           onClick={() => setActiveNodeDetail(activeNodeDetail === 'db' ? null : 'db')}
-          className={`p-2.5 rounded-lg bg-[#1a1f2e] border transition-all cursor-pointer flex flex-col gap-1 ${
+          className={`p-2 sm:p-2.5 rounded-lg bg-[#1a1f2e] border transition-all cursor-pointer flex flex-col gap-1 min-w-0 overflow-hidden ${
             activeNodeDetail === 'db' ? 'border-[#ccbeff] bg-[#252a39]' : 'border-transparent hover:border-[#14BDFE]/30'
           }`}
         >
           <div className="flex items-center justify-between">
-            <span className="material-symbols-outlined text-[18px] text-[#ccbeff]">database</span>
-            <span className="font-mono text-[11px] text-[#89d5ff]">RDS</span>
+            <span className="material-symbols-outlined text-[16px] sm:text-[18px] text-[#ccbeff]">database</span>
+            <span className="font-mono text-[10px] sm:text-[11px] text-[#89d5ff]">RDS</span>
           </div>
-          <span className="text-xs text-[#94A3B8]">Postgres/Redis</span>
-          <span className="text-xs font-bold text-[#FEFEFE]">Sync OK</span>
+          <span className="text-[11px] sm:text-xs text-[#94A3B8] truncate">Postgres/Redis</span>
+          <span className="text-[11px] sm:text-xs font-bold text-[#FEFEFE] truncate">Sync OK</span>
         </div>
       </div>
 

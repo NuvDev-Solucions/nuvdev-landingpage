@@ -161,7 +161,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                   <label className="text-sm font-semibold text-[#FEFEFE]">
                     Tipo de Solução Desejada
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                  <div className="grid grid-cols-1 min-[420px]:grid-cols-2 sm:grid-cols-3 gap-2.5">
                     {solutionOptions.map((opt) => {
                       const isChecked = formData.solutions.includes(opt.id);
                       return (

@@ -12,7 +12,7 @@ export const Hero: React.FC<HeroProps> = ({
   onExploreSolutions
 }) => {
   return (
-    <section id="inicio" className="relative max-w-[80rem] mx-auto px-4 md:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 md:pb-24 scroll-mt-24">
+    <section id="inicio" className="relative max-w-[80rem] mx-auto px-4 md:px-6 lg:px-8 pt-10 sm:pt-14 pb-16 md:pb-24 scroll-mt-24 overflow-hidden">
       {/* Ambient Lighting Background Halos */}
       <div className="absolute -top-32 left-1/4 w-96 h-96 bg-[#066eff]/20 rounded-full blur-[128px] pointer-events-none -z-10"></div>
       <div className="absolute top-1/3 -right-24 w-[30rem] h-[30rem] bg-[#6629FF]/15 rounded-full blur-[140px] pointer-events-none -z-10"></div>
