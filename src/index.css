@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-canvas-black: #05070E;
+  --color-background: #0e1321;
+  --color-surface: #0e1321;
+  --color-surface-card: #0F172A;
+  --color-surface-container: #1a1f2e;
+  --color-surface-container-low: #161b2a;
+  --color-surface-container-high: #252a39;
+  --color-surface-container-highest: #303444;
+  --color-surface-container-lowest: #090e1c;
+  --color-surface-variant: #303444;
+
+  --color-on-surface: #dee2f6;
+  --color-on-surface-variant: #c2c6d8;
+  --color-text-pure: #FEFEFE;
+  --color-text-muted: #94A3B8;
+
+  --color-electric-cyan: #0CBFFD;
+  --color-sky-bright: #14BDFE;
+  --color-cerulean-deep: #0775FF;
+  --color-primary-container: #066eff;
+  --color-indigo-tech: #454BFF;
+  --color-violet-glow: #6629FF;
+  --color-secondary: #89d5ff;
+  --color-tertiary: #ccbeff;
+  --color-error: #ffb4ab;
+}
+
+@layer base {
+  * {
+    border-color: rgba(20, 189, 254, 0.12);
+  }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #05070E;
+    color: #dee2f6;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom glow utility */
+.cyan-glow {
+  box-shadow: 0 0 24px rgba(12, 191, 253, 0.25);
+}
+
+.blue-glow {
+  box-shadow: 0 0 28px rgba(6, 110, 255, 0.3);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 32px rgba(12, 191, 253, 0.35);
+}
+
