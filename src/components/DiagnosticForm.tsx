@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ProjectFormData } from '../types';
-import { Check, Send, Lock, Code, Clock, CheckCircle2, Calculator, Sparkles } from 'lucide-react';
+import { Check, Send, Lock, Code, Clock, CheckCircle2, Calculator, AlertCircle } from 'lucide-react';
 
 interface DiagnosticFormProps {
   initialSolution?: string;
@@ -18,6 +18,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const solutionOptions = [
     { id: 'Sistemas Corporativos', label: 'Sistemas Corporativos' },
@@ -40,13 +41,51 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    const sizeLabels: Record<string, string> = {
+      startup: 'Startup em crescimento (1-20 colaboradores)',
+      media: 'Média empresa (21-100 colaboradores)',
+      enterprise: 'Corporação / Enterprise (100+ colaboradores)'
+    };
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/4ce4470362e506b40277bcf0945e3873', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Nome: formData.fullName,
+          Email: formData.corporateEmail,
+          Telefone: formData.phone || 'Não informado',
+          'Porte da Empresa': sizeLabels[formData.companySize] || formData.companySize,
+          'Soluções de Interesse': formData.solutions.join(', ') || 'Nenhuma selecionada',
+          'Descrição do Projeto': formData.projectDescription || 'Não informado',
+          _subject: `[NuvDev] Novo Diagnóstico Técnico - ${formData.fullName}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.message || 'Falha na resposta do servidor.');
+      }
+    } catch (err: unknown) {
+      console.error('Erro ao enviar solicitação via FormSubmit:', err);
+      setErrorMessage(
+        'Não foi possível enviar automaticamente. Por favor, tente novamente ou nos envie diretamente em contato@nuvdev.com'
+      );
+    } finally {
       setLoading(false);
-      setSubmitted(true);
-    }, 600);
+    }
   };
 
   // Dynamic estimate calculation based on selections
@@ -155,7 +194,26 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+              <form
+                action="https://formsubmit.co/4ce4470362e506b40277bcf0945e3873"
+                method="POST"
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-5"
+              >
+                {/* FormSubmit Configuration Hidden Fields */}
+                <input type="hidden" name="_subject" value={`[NuvDev] Novo Diagnóstico Técnico - ${formData.fullName || 'Contato'}`} />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="solucoes_selecionadas" value={formData.solutions.join(', ')} />
+
+                {/* Error Banner */}
+                {errorMessage && (
+                  <div className="p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs flex items-center gap-2.5 animate-in fade-in duration-200">
+                    <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
                 {/* Solution Selection Checkboxes */}
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-semibold text-[#FEFEFE]">
@@ -175,6 +233,8 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                         >
                           <input
                             type="checkbox"
+                            name="solucoes"
+                            value={opt.id}
                             checked={isChecked}
                             onChange={() => handleCheckboxChange(opt.id)}
                             className="w-4 h-4 rounded text-[#0CBFFD] bg-[#090e1c] border-[#14BDFE]/30 focus:ring-0 cursor-pointer"
@@ -194,6 +254,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                     </label>
                     <input
                       type="text"
+                      name="nome"
                       required
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
@@ -208,6 +269,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       value={formData.corporateEmail}
                       onChange={(e) => setFormData({ ...formData, corporateEmail: e.target.value })}
@@ -225,6 +287,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                     </label>
                     <input
                       type="tel"
+                      name="telefone"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+55 (31) 90000-0000"
@@ -237,6 +300,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                       Porte da Empresa
                     </label>
                     <select
+                      name="porte_empresa"
                       value={formData.companySize}
                       onChange={(e) => setFormData({ ...formData, companySize: e.target.value })}
                       className="w-full px-4 py-3 rounded-xl bg-[#1a1f2e] border border-white/10 text-[#FEFEFE] text-sm focus:outline-none focus:border-[#0CBFFD] focus:ring-1 focus:ring-[#0CBFFD]/30 transition-all cursor-pointer"
@@ -261,6 +325,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                   </label>
                   <textarea
                     rows={3}
+                    name="descricao_projeto"
                     value={formData.projectDescription}
                     onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
                     placeholder="Conte brevemente sobre o escopo, objetivos ou integrações necessárias..."

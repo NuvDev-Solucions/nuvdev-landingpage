@@ -8,10 +8,10 @@ interface FooterProps {
   onOpenTerms?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ 
-  onNavigateToSection, 
-  onOpenPrivacy, 
-  onOpenTerms 
+export const Footer: React.FC<FooterProps> = ({
+  onNavigateToSection,
+  onOpenPrivacy,
+  onOpenTerms
 }) => {
   return (
     <footer className="w-full bg-[#090e1c] border-t border-[#14BDFE]/15">
@@ -116,7 +116,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="flex flex-col gap-2.5 pt-1">
               <div className="flex items-center gap-2.5 text-sm text-[#dee2f6]">
                 <Mail className="w-4 h-4 text-[#0CBFFD] shrink-0" />
-                <a href="mailto:contato@nuvdev.com.br" className="hover:text-[#0CBFFD] transition-colors">
+                <a href="mailto:contato@nuvdev.com" className="hover:text-[#0CBFFD] transition-colors">
                   contato@nuvdev.com
                 </a>
               </div>
