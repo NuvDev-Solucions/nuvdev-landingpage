@@ -18,6 +18,7 @@ import { PrivacyPage } from './components/PrivacyPage';
 import { TermsModal } from './components/TermsModal';
 import { TermsPage } from './components/TermsPage';
 import { NotFoundPage } from './components/NotFoundPage';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { useRoute, routeService } from './services/routeService';
 import { SolutionItem, CaseStudy } from './types';
 
@@ -122,6 +123,9 @@ export default function App() {
         onOpenPrivacy={() => setIsPrivacyModalOpen(true)}
         onOpenTerms={() => setIsTermsModalOpen(true)}
       />
+
+      {/* Floating WhatsApp Quick Contact Button */}
+      <WhatsAppButton />
 
       {/* Solution Detail Modal */}
       <SolutionModal

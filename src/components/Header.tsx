@@ -53,6 +53,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDiagnosis }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const whatsappQuoteUrl =
+    'https://wa.me/5531975747515?text=' +
+    encodeURIComponent('Olá! Vim pelo site da NuvDev e gostaria de solicitar um orçamento.');
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0F172A]/85 backdrop-blur-xl border-b border-[#14BDFE]/15 shadow-[0_1px_16px_rgba(0,0,0,0.4)]">
       <div className="h-20 max-w-[80rem] mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-between gap-4">
@@ -134,17 +138,17 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDiagnosis }) => {
 
         {/* Action Controls & Badges */}
         <div className="flex items-center gap-3">
-          {/* Availability Status Chip */}
-
-          {/* Primary CTA Button */}
-          <button
-            onClick={onOpenDiagnosis}
+          {/* Primary CTA Button -> WhatsApp */}
+          <a
+            href={whatsappQuoteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             id="nav-cta-estimate"
-            className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#0CBFFD] via-[#0775FF] to-[#066eff] text-[#FEFEFE] font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(12,191,253,0.35)] hover:shadow-[0_0_28px_rgba(12,191,253,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all"
+            className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-gradient-to-r from-[#0CBFFD] via-[#0775FF] to-[#066eff] text-[#FEFEFE] font-bold text-xs tracking-wide shadow-[0_0_20px_rgba(12,191,253,0.35)] hover:shadow-[0_0_28px_rgba(12,191,253,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
           >
             <span>Solicitar Orçamento</span>
             <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
-          </button>
+          </a>
 
           {/* Mobile Hamburger Toggle */}
           <button
@@ -196,15 +200,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDiagnosis }) => {
             Diagnóstico Técnico Gratuito
           </button>
           <div className="pt-2 flex flex-col gap-3">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenDiagnosis();
-              }}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#0CBFFD] to-[#066eff] text-[#FEFEFE] font-bold text-sm text-center shadow-lg"
+            <a
+              href={whatsappQuoteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#0CBFFD] to-[#066eff] text-[#FEFEFE] font-bold text-sm text-center shadow-lg flex items-center justify-center gap-1.5 cursor-pointer"
             >
-              Solicitar Orçamento
-            </button>
+              <span>Solicitar Orçamento</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
       )}

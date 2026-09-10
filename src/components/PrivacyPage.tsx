@@ -15,6 +15,7 @@ import {
   ChevronRight,
   ArrowUp
 } from 'lucide-react';
+import { WhatsAppButton } from './WhatsAppButton';
 
 export const PrivacyPage: React.FC = () => {
   useEffect(() => {
@@ -403,6 +404,9 @@ export const PrivacyPage: React.FC = () => {
           Conformidade integral com a Lei Federal nº 13.709/2018 • Belo Horizonte - MG | Hub Remoto
         </p>
       </footer>
+
+      {/* Floating WhatsApp Quick Contact Button */}
+      <WhatsAppButton />
     </div>
   );
 };

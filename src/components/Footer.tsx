@@ -123,7 +123,15 @@ export const Footer: React.FC<FooterProps> = ({
 
               <div className="flex items-center gap-2.5 text-sm text-[#dee2f6]">
                 <Phone className="w-4 h-4 text-[#0CBFFD] shrink-0" />
-                <span>+55 (31) 97574-7515</span>
+                <a
+                  href="https://wa.me/5531975747515?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20NuvDev%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#0CBFFD] transition-colors flex items-center gap-1.5"
+                >
+                  <span>+55 (31) 97574-7515</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono border border-emerald-500/30">WhatsApp</span>
+                </a>
               </div>
 
               <div className="flex items-center gap-2.5 text-sm text-[#dee2f6]">

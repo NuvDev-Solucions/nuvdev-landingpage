@@ -14,6 +14,7 @@ import {
   ArrowUp,
   CheckCircle2
 } from 'lucide-react';
+import { WhatsAppButton } from './WhatsAppButton';
 
 export const TermsPage: React.FC = () => {
   useEffect(() => {
@@ -346,6 +347,9 @@ export const TermsPage: React.FC = () => {
           Condições Gerais de Contratação &amp; Engenharia • Belo Horizonte - MG | Hub Remoto
         </p>
       </footer>
+
+      {/* Floating WhatsApp Quick Contact Button */}
+      <WhatsAppButton />
     </div>
   );
 };
