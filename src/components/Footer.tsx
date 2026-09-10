@@ -4,9 +4,15 @@ import { Mail, Phone, MapPin, ShieldCheck, Award } from 'lucide-react';
 
 interface FooterProps {
   onNavigateToSection: (sectionId: string) => void;
+  onOpenPrivacy?: () => void;
+  onOpenTerms?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigateToSection }) => {
+export const Footer: React.FC<FooterProps> = ({ 
+  onNavigateToSection, 
+  onOpenPrivacy, 
+  onOpenTerms 
+}) => {
   return (
     <footer className="w-full bg-[#090e1c] border-t border-[#14BDFE]/15">
       <div className="max-w-[80rem] mx-auto px-4 md:px-6 lg:px-8 pt-16 pb-12">
@@ -84,12 +90,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateToSection }) => {
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-[#c2c6d8]">
               <li
-                onClick={() => onNavigateToSection('diagnostico')}
-                className="hover:text-[#0CBFFD] transition-colors cursor-pointer"
-              >
-                Sobre Nós
-              </li>
-              <li
                 onClick={() => onNavigateToSection('metodologia')}
                 className="hover:text-[#0CBFFD] transition-colors cursor-pointer"
               >
@@ -100,18 +100,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateToSection }) => {
                 className="hover:text-[#0CBFFD] transition-colors cursor-pointer"
               >
                 Cases de Sucesso
-              </li>
-              <li
-                onClick={() => onNavigateToSection('diagnostico')}
-                className="hover:text-[#0CBFFD] transition-colors cursor-pointer"
-              >
-                Segurança da Informação
-              </li>
-              <li
-                onClick={() => onNavigateToSection('diagnostico')}
-                className="hover:text-[#0CBFFD] transition-colors cursor-pointer"
-              >
-                Carreiras Tech
               </li>
             </ul>
           </div>
@@ -129,18 +117,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateToSection }) => {
               <div className="flex items-center gap-2.5 text-sm text-[#dee2f6]">
                 <Mail className="w-4 h-4 text-[#0CBFFD] shrink-0" />
                 <a href="mailto:contato@nuvdev.com.br" className="hover:text-[#0CBFFD] transition-colors">
-                  contato@nuvdev.com.br
+                  contato@nuvdev.com
                 </a>
               </div>
 
               <div className="flex items-center gap-2.5 text-sm text-[#dee2f6]">
                 <Phone className="w-4 h-4 text-[#0CBFFD] shrink-0" />
-                <span>+55 (11) 98765-4321</span>
+                <span>+55 (31) 97574-7515</span>
               </div>
 
               <div className="flex items-center gap-2.5 text-sm text-[#dee2f6]">
                 <MapPin className="w-4 h-4 text-[#0CBFFD] shrink-0" />
-                <span>São Paulo - SP | Hub Remoto</span>
+                <span>Belo Horizonte - MG | Hub Remoto</span>
               </div>
             </div>
           </div>
@@ -153,12 +141,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateToSection }) => {
           </p>
 
           <div className="flex flex-wrap items-center gap-6 text-xs text-[#94A3B8]">
-            <span className="hover:text-[#FEFEFE] cursor-pointer transition-colors">
+            <button
+              type="button"
+              onClick={onOpenPrivacy}
+              className="hover:text-[#FEFEFE] cursor-pointer transition-colors text-left"
+            >
               Privacidade &amp; LGPD
-            </span>
-            <span className="hover:text-[#FEFEFE] cursor-pointer transition-colors">
+            </button>
+            <button
+              type="button"
+              onClick={onOpenTerms}
+              className="hover:text-[#FEFEFE] cursor-pointer transition-colors text-left"
+            >
               Termos de Serviço
-            </span>
+            </button>
             <span className="hover:text-[#FEFEFE] cursor-pointer transition-colors flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
               Status dos Serviços (100% Online)

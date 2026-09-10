@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { BentoGrid } from './components/BentoGrid';
@@ -13,12 +13,33 @@ import { DiagnosticForm } from './components/DiagnosticForm';
 import { Footer } from './components/Footer';
 import { SolutionModal } from './components/SolutionModal';
 import { CaseModal } from './components/CaseModal';
+import { PrivacyModal } from './components/PrivacyModal';
+import { PrivacyPage } from './components/PrivacyPage';
+import { TermsModal } from './components/TermsModal';
+import { TermsPage } from './components/TermsPage';
+import { NotFoundPage } from './components/NotFoundPage';
+import { useRoute, routeService } from './services/routeService';
 import { SolutionItem, CaseStudy } from './types';
 
 export default function App() {
+  const currentRoute = useRoute();
+
   const [selectedSolution, setSelectedSolution] = useState<SolutionItem | null>(null);
   const [selectedCase, setSelectedCase] = useState<CaseStudy | null>(null);
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState<boolean>(false);
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState<boolean>(false);
   const [initialSolutionForForm, setInitialSolutionForForm] = useState<string>('Sistemas Corporativos');
+
+  // Handle hash scrolling on mount or when route changes to home
+  useEffect(() => {
+    if (currentRoute.route === 'home' && window.location.hash) {
+      const hashId = window.location.hash.replace('#', '');
+      const timer = setTimeout(() => {
+        scrollToSection(hashId);
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [currentRoute.route]);
 
   const scrollToSection = (id: string) => {
     if (id === 'inicio') {
@@ -50,6 +71,22 @@ export default function App() {
     scrollToSection('diagnostico');
   };
 
+  // Route 1: Dedicated Privacy & LGPD Page
+  if (currentRoute.route === 'privacy') {
+    return <PrivacyPage />;
+  }
+
+  // Route 2: Dedicated Terms of Service Page
+  if (currentRoute.route === 'terms') {
+    return <TermsPage />;
+  }
+
+  // Route 3: 404 Not Found Page
+  if (currentRoute.route === 'notfound') {
+    return <NotFoundPage pathname={currentRoute.pathname} />;
+  }
+
+  // Route 4: Home / Landing Page
   return (
     <div className="bg-[#05070E] min-h-screen text-[#dee2f6] font-sans antialiased selection:bg-[#0CBFFD]/20 selection:text-[#0CBFFD] flex flex-col w-full max-w-full overflow-x-hidden">
       {/* Fixed Navigation Header */}
@@ -80,7 +117,11 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onNavigateToSection={scrollToSection} />
+      <Footer 
+        onNavigateToSection={scrollToSection} 
+        onOpenPrivacy={() => setIsPrivacyModalOpen(true)}
+        onOpenTerms={() => setIsTermsModalOpen(true)}
+      />
 
       {/* Solution Detail Modal */}
       <SolutionModal
@@ -94,6 +135,18 @@ export default function App() {
         caseStudy={selectedCase}
         onClose={() => setSelectedCase(null)}
         onRequestSimilar={(title) => handleQuoteWithSolution(`Projeto Similar a: ${title}`)}
+      />
+
+      {/* Privacy & LGPD Summary Modal */}
+      <PrivacyModal
+        isOpen={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
+      />
+
+      {/* Terms of Service Summary Modal */}
+      <TermsModal
+        isOpen={isTermsModalOpen}
+        onClose={() => setIsTermsModalOpen(false)}
       />
     </div>
   );

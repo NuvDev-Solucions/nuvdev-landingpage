@@ -227,7 +227,7 @@ export const DiagnosticForm: React.FC<DiagnosticFormProps> = ({ initialSolution 
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="+55 (11) 90000-0000"
+                      placeholder="+55 (31) 90000-0000"
                       className="w-full px-4 py-3 rounded-xl bg-[#1a1f2e] border border-white/10 text-[#FEFEFE] text-sm placeholder:text-[#64748B] focus:outline-none focus:border-[#0CBFFD] focus:ring-1 focus:ring-[#0CBFFD]/30 transition-all"
                     />
                   </div>
