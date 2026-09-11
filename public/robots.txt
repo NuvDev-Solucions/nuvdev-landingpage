@@ -1,0 +1,33 @@
+# ==============================================================================
+# NuvDev Robots.txt
+# Website: https://nuvdev.com
+# Descrição: Regras de rastreamento e indexação para Googlebot e demais buscadores
+# ==============================================================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*?*preview=true
+
+# Regras específicas para Googlebot
+User-agent: Googlebot
+Allow: /
+Allow: /privacidade
+Allow: /termos
+Allow: /assets/
+Allow: /favicon.svg
+
+# Regras específicas para o robô de imagens do Google
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /favicon.svg
+
+# Bingbot
+User-agent: Bingbot
+Allow: /
+
+# Sitemap oficial indexado pelo Google Search Console
+Sitemap: https://nuvdev.com/sitemap.xml
+
+# Host canônico
+Host: https://nuvdev.com

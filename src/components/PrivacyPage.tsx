@@ -20,6 +20,11 @@ import { WhatsAppButton } from './WhatsAppButton';
 export const PrivacyPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    document.title = 'Política de Privacidade & Proteção de Dados (LGPD) | NuvDev';
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', 'https://nuvdev.com/privacidade');
+    }
   }, []);
 
   const scrollToAnchor = (id: string) => {

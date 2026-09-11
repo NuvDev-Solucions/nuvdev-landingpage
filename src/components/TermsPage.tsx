@@ -19,6 +19,11 @@ import { WhatsAppButton } from './WhatsAppButton';
 export const TermsPage: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    document.title = 'Termos de Serviço & Condições Contratuais | NuvDev';
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical) {
+      canonical.setAttribute('href', 'https://nuvdev.com/termos');
+    }
   }, []);
 
   const scrollToAnchor = (id: string) => {

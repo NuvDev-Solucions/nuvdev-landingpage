@@ -33,12 +33,20 @@ export default function App() {
 
   // Handle hash scrolling on mount or when route changes to home
   useEffect(() => {
-    if (currentRoute.route === 'home' && window.location.hash) {
-      const hashId = window.location.hash.replace('#', '');
-      const timer = setTimeout(() => {
-        scrollToSection(hashId);
-      }, 150);
-      return () => clearTimeout(timer);
+    if (currentRoute.route === 'home') {
+      document.title = 'NuvDev | Desenvolvimento de Sistemas Corporativos, Totens com IA & Cloud';
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) {
+        canonical.setAttribute('href', 'https://nuvdev.com/');
+      }
+
+      if (window.location.hash) {
+        const hashId = window.location.hash.replace('#', '');
+        const timer = setTimeout(() => {
+          scrollToSection(hashId);
+        }, 150);
+        return () => clearTimeout(timer);
+      }
     }
   }, [currentRoute.route]);
 
